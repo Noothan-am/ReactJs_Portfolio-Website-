@@ -860,7 +860,7 @@ label.valid:after {
 .text_field::-webkit-input-placeholder {
   font-size: 16px;
   font-weight: 400;
-  color: rgba(0, 0, 0, 0.3);
+  color: rgba(0, 0, 0, 0.747);
 }
 
 .input_field:-moz-placeholder,

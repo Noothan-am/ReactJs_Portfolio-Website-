@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect,useState } from 'react'
 import aboutpic from "../images/aboutpic.png";
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 function Aboutus() {
-
+  const [details, setdetails] = useState("");
+  const navigate = useNavigate();
   const userauth = async () =>{
-    const navigate = Navigate();
     try{
       const res = await fetch('/aboutus',{
         method:'GET',
@@ -14,23 +14,26 @@ function Aboutus() {
         },
         credentials:"include"
       })
-      const data = await res.json();
-      if(data.status === 200){ 
-        window.alert("user is authenticated");
+      if(res.status === 200){ 
         navigate('/aboutus');
+        const data = await res.json();
+        setdetails(data);
       }
       else{
-        window.alert("user is not authenticated");
+        console.log("i ma here in try else");
         navigate("/signin");
       }
     }catch(e){
       console.log("failed to send");
+      console.log("i ma here in catch");
       navigate("/signin");
     }
   }
 
   useEffect(() => {
     userauth();
+    // fetch('/aboutus').then(res=>{console.log(res)})
+    
   }, [])
 
 
@@ -49,8 +52,8 @@ function Aboutus() {
 
             <div className="col-md-6">
               <div className="profile-head">
-                <h5>{ }</h5>
-                <h6>{ }</h6>
+                <h5>{ details.name}</h5>
+                <h6>{details.work }</h6>
                 <p className="profile-rating mt-3 mb-5">RANKINGS: <span> 1/10 </span></p>
                 <ul className="nav nav-tabs" role="tablist">
                   <li className="nav-item">
@@ -107,7 +110,7 @@ function Aboutus() {
                       <label>Name</label>
                     </div>
                     <div className="col-md-6 ">
-                      <p>{ }</p>
+                      <p>{details.name}</p>
                     </div>
                   </div>
                   <div className="row mt-3">
@@ -115,7 +118,7 @@ function Aboutus() {
                       <label>Email</label>
                     </div>
                     <div className="col-md-6">
-                      <p>{ }</p>
+                      <p>{details.email}</p>
                     </div>
                   </div>
                   <div className="row mt-3">
@@ -123,7 +126,7 @@ function Aboutus() {
                       <label>Phone</label>
                     </div>
                     <div className="col-md-6">
-                      <p>{ }</p>
+                      <p>{details.phone}</p>
                     </div>
                   </div>
                   <div className="row mt-3">
@@ -131,7 +134,7 @@ function Aboutus() {
                       <label>Profession</label>
                     </div>
                     <div className="col-md-6">
-                      <p>Web Devloper</p>
+                      <p>{details.work}</p>
                     </div>
                   </div>
                 </div>

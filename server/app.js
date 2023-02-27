@@ -2,8 +2,8 @@ import express, { json } from 'express';
 import router from './routes/route.js';
 const app = express();
 
-// import cookieparser from 'cookie-parser'
-// app.use(cookieparser());
+import cookieparser from 'cookie-parser'
+app.use(cookieparser());
 import './models/models.js';
 app.use(json());
 const PORT = process.env.PORT || 5000;

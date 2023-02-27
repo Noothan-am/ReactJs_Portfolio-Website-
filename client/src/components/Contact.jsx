@@ -1,6 +1,40 @@
-import React from 'react'
-
+import React, { useEffect,useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 function Contact() {
+  
+  const [details, setdetails] = useState("");
+  const navigate = useNavigate();
+
+  const userauth = async () =>{
+    try{
+      const res = await fetch('/contact',{
+        method:'GET',
+        headers:{
+        Accept: "application/json",
+        "Content-Type": "application/json"
+        },
+        credentials:"include"
+      })
+      if(res.status === 200){ 
+        console.log("i ma here in try");
+        const data = await res.json();
+        setdetails(data);
+      }
+      else{
+        console.log("i ma here in try else");
+        navigate("/contact");
+      }
+    }catch(e){
+      console.log("failed to send");
+      console.log("i ma here in catch");
+      navigate("/contact");
+    }
+  }
+
+  useEffect(() => {
+    userauth();    
+  }, [])
+
   return (
     <>
       <div className="contact_info">
@@ -13,14 +47,14 @@ function Contact() {
                     <img src="https://img.icons8.com/office/24/000000/iphone.png" alt="" /></div>
                   <div className="contact_info_content">
                     <div className="contact_info_title">Phone</div>
-                    <div className="contact_info_text">+91 1111 543 2198</div>
+                  <div className="contact_info_text">{details.phone}</div>
                   </div>
                 </div>
                 <div className="contact_info_item d-flex flex-row align-items-center justify-content-start">
                   <div className="contact_info_image"><img src="https://img.icons8.com/ultraviolet/24/000000/filled-message.png" alt="" /></div>
                   <div className="contact_info_content">
                     <div className="contact_info_title">Email</div>
-                    <div className="contact_info_text">contact@thapa.com</div>
+                    <div className="contact_info_text">{details.email}</div>
                   </div>
                 </div>
                 <div className="contact_info_item d-flex flex-row align-items-center justify-content-start">
@@ -48,13 +82,13 @@ function Contact() {
                 <form id="contact_form">
                   <div className="contact_form_inputs d-flex flex-md-row flex-column justify-content-between align-items-between">
                     <input type="text" id="contact_form_name"
-                      className="contact_form_name input_field" name = "name" placeholder="Your name" required />
+                      className="contact_form_name input_field" name = "name" disabled placeholder={details.name} required />
 
                     <input type="email" id="contact_form_email"
-                      className="contact_form_email input_field" name="email" placeholder="Your Email" required />
+                      className="contact_form_email input_field" name="email" disabled placeholder={details.email} required />
 
                     <input type="number" id="contact_form_phone"
-                      className="contact_form_phone input_field" name="phone" placeholder="Your Phone Number" required />
+                      className="contact_form_phone input_field" name="phone" disabled placeholder={details.phone} required />
                   </div>
 
                   <div className="contact_form_text mt-5">

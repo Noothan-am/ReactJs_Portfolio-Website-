@@ -49,7 +49,7 @@ router.post('/signin', async (req, res) => {
                 
                 const token = await checkUser.generateToken();
                 res.cookie('jsonweb',token);
-                return res.status(200).send("about page");
+                return res.status(200).send({message:"thisis token"});
             }
             return res.status(401).json({message:"invalid credentials"});
         }
@@ -61,7 +61,16 @@ router.post('/signin', async (req, res) => {
 })
 
 router.get('/aboutus',authenticate,(req, res) => {
-        res.status(200).send(req.userinfo);
+    res.status(200).send(req.userinfo);
+})
+
+router.get('/contact',authenticate,(req, res) => {
+    res.status(200).send(req.userinfo);
+})
+
+router.get('/logout',(req,res)=>{
+    res.clearCookie('jsonweb',{path:"/"});
+    res.status(200).send("");
 })
 
 

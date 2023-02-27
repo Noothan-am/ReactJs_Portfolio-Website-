@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import loginpic from "../images/login.svg";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate,NavLink } from "react-router-dom";
 function Login() {
   const [login, setlogin] = useState({
     email: "",
@@ -32,8 +32,8 @@ function Login() {
     if(res.status === 200 && res)
     {
       window.alert("login succesfull");
-      navigate('/aboutus');
       await res.json();
+      navigate('/aboutus');
     }
     else{
       window.alert("user login unsuccesfull");

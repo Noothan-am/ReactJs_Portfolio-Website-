@@ -8,6 +8,7 @@ import Contact from "./components/Contact";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Error from "./components/Error";
+import Logout from "./components/Logout";
 function App() {
   return (
     <>
@@ -18,6 +19,7 @@ function App() {
     <Route exact path="/contact" element={<Contact/>} />
     <Route exact path="/signin" element={<Login/>} />
     <Route exact path="/signup" element={<Signup/>} />
+    <Route exact path="/logout" element={<Logout/>} />
     <Route path="*" element={<Error/>} />
     </Routes>
     </>

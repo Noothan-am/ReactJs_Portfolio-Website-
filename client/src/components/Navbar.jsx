@@ -14,6 +14,7 @@ function Navbar() {
                             <NavLink className="nav-link" to="/signup">Sign Us</NavLink>
                             <NavLink className="nav-link" to="/contact">Contact Us</NavLink>
                             <NavLink className="nav-link" to="/signin">Login</NavLink>
+                            <NavLink className="nav-link" to="/logout">Logout</NavLink>
                         </div>
                     </div>
                 </div>
